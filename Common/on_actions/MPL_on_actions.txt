@@ -1,0 +1,11 @@
+on_game_start_country = {
+	events = {
+		ConnectSystem.1
+	}
+}
+#on_yearly_pulse_country
+on_monthly_pulse_country = {
+	events = {
+		ConnectSystem.1
+	}
+}
