@@ -32,25 +32,61 @@ can_add_claim = {
 			always = yes
 		}
 	}
-	# PHI
+	#phi
 	custom_tooltip = {
-		fail_text = CANNOT_ADD_CLAIM_NOT_IN_LINE
-		any_neighbor_system = {
-			OR = {
-				AND = {
-					exists = owner
-					OR = {
-						owner = { is_same_value = root }
-						owner = {
-							is_subject = yes
-							overlord = { is_same_value = root }
-						}
-					}
-				}
-				root = { has_claim = prev }
-			}
+		fail_text = isnt_link
+			closest_system = {
+			use_bypasses = yes
+			min_steps = 1
+			max_steps = 3
+				# distance = {
+				# 	source = Root
+				# 	use_bypasses = yes
+				# 	min_jumps = 1
+				# 	max_jumps = 3
+				# }
+			has_natural_wormhole = yes
 		}
 	}
+
+	# custom_tooltip = {
+	# 	fail_text = CANNOT_ADD_CLAIM_NOT_IN_LINE
+	# 	OR ={#gobbi
+	# 		any_neighbor_system = {
+				
+	# 			OR = {
+	# 				AND = {
+	# 					exists = owner
+	# 					OR = {
+	# 						owner = { is_same_value = root }
+	# 						owner = {
+	# 							is_subject = yes
+	# 							overlord = { is_same_value = root }
+	# 						}
+	# 					}
+	# 				}
+	# 				root = { 
+	# 						has_claim = prev 
+	# 				}
+	# 			}
+	# 		}
+	# 		any_closest_system = {
+	# 			limit = {
+	# 				distance = {
+	# 					source = prev
+	# 					use_bypasses = yes
+	# 					min_jumps = 1
+	# 					max_jumps = 1
+	# 				}
+
+	# 			}
+	# 			# root = { 
+	# 			# 	has_claim = prev 
+	# 			# }
+	# 			#has_natural_wormhole = yes
+	# 		}
+	# 	}
+	# }
 	custom_tooltip = {
 		fail_text = CANNOT_ADD_CLAIM_POLICY
 		OR = {
