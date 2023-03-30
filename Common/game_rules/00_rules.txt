@@ -32,61 +32,37 @@ can_add_claim = {
 			always = yes
 		}
 	}
-	#phi
+	
 	custom_tooltip = {
-		fail_text = isnt_link
-			closest_system = {
+		fail_text = CANNOT_ADD_CLAIM_NOT_IN_LINE
+		closest_system = {
+			limit = {
+				AND = {
+					OR = {
+						AND = {
+							
+							exists = owner
+							OR = {
+								owner = { is_same_value = root }
+								owner = {
+									is_subject = yes
+									overlord = { is_same_value = root }
+								}
+							}
+						}
+						root = { 
+								has_claim = prev 
+						}
+					}
+				}
+			}
 			use_bypasses = yes
 			min_steps = 1
-			max_steps = 3
-				# distance = {
-				# 	source = Root
-				# 	use_bypasses = yes
-				# 	min_jumps = 1
-				# 	max_jumps = 3
-				# }
-			has_natural_wormhole = yes
+			max_steps = 1
+			
+			
 		}
 	}
-
-	# custom_tooltip = {
-	# 	fail_text = CANNOT_ADD_CLAIM_NOT_IN_LINE
-	# 	OR ={#gobbi
-	# 		any_neighbor_system = {
-				
-	# 			OR = {
-	# 				AND = {
-	# 					exists = owner
-	# 					OR = {
-	# 						owner = { is_same_value = root }
-	# 						owner = {
-	# 							is_subject = yes
-	# 							overlord = { is_same_value = root }
-	# 						}
-	# 					}
-	# 				}
-	# 				root = { 
-	# 						has_claim = prev 
-	# 				}
-	# 			}
-	# 		}
-	# 		any_closest_system = {
-	# 			limit = {
-	# 				distance = {
-	# 					source = prev
-	# 					use_bypasses = yes
-	# 					min_jumps = 1
-	# 					max_jumps = 1
-	# 				}
-
-	# 			}
-	# 			# root = { 
-	# 			# 	has_claim = prev 
-	# 			# }
-	# 			#has_natural_wormhole = yes
-	# 		}
-	# 	}
-	# }
 	custom_tooltip = {
 		fail_text = CANNOT_ADD_CLAIM_POLICY
 		OR = {
@@ -2430,12 +2406,7 @@ can_be_renamed_by = {
 # Checks if the country is allowed to build any orbital station around this planet/star
 can_build_station_around = {
 	exists = root
-	FROM = {
-		NOR = {
-			has_planet_flag = haven_flag #FotD
-			has_planet_flag = no_observation #Solarpunk
-		}
-	}
+	always = yes
 }
 
 # Root/this = country
@@ -2467,7 +2438,12 @@ can_build_military_station_around = {
 # Checks if the country is allowed to build an observation station around this planet/star
 can_build_observation_station_around = {
 	exists = root
-	always = yes
+	FROM = {
+		NOR = {
+			has_planet_flag = haven_flag #FotD
+			has_planet_flag = no_observation #Solarpunk
+		}
+	}
 }
 
 # Root/this = country
