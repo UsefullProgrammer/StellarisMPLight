@@ -8,7 +8,7 @@ country_event = {
 	
 	trigger = {
 		is_at_war = no
-		NOT = { has_global_flag = phi_border_gore_allowed }
+		NOT = { has_technology = tech_jump_drive_1 }
 	}
 	
 	immediate = {
@@ -18,69 +18,6 @@ country_event = {
 				set_star_flag = connected
 			}
 		}
-		#need connect whormole how star connected phi mod not permit this
-		#to do
-		#----------------------------------------
-		# every_system_within_border = {
-		# 	if = {
-		# 		limit = {
-		# 			OR = {
-		# 				has_natural_wormhole = yes
-		# 				NOT = { has_star_flag = connected }
-		# 			}
-		# 		}
-		# 		prev = {
-		# 			set_star_flag = connected
-		# 		}
-		# 	}
-		# }
-		#-----------------------------------------
-		every_system_within_border = {
-			limit = {
-				NOT = { has_star_flag = connected }
-				has_natural_wormhole = yes
-			}
-			if = {
-				limit = {
-					has_natural_wormhole = yes
-				}
-				set_star_flag = connected
-			}
-		}
-		#versione cool by test
-		#need connect whormole how star connected phi mod not permit this
-		#to do
-		#----------------------------------------
-		# while = {
-		# 	if = {
-		# 		limit = {
-		# 			any_system_within_border = {
-		# 				AND = {
-		# 					NOT = { has_star_flag = connected }
-		# 					has_natural_wormhole = yes
-		# 				}
-		# 				root = {
-		# 					any_system_within_border = {
-		# 						link_wormholes = prevprev
-		# 						has_star_flag = connected
-		# 					}
-		# 				}
-		# 			}
-		# 		}
-		# 		set_star_flag = connected
-		# 	}
-		# 	every_system_within_border = {
-		# 		if = {
-		# 			limit = {
-		# 				any_neighbor_system = {
-		# 					has_star_flag = connected
-		# 				}
-		# 			}
-		# 			set_star_flag = connected
-		# 		}
-		# 	}
-		# }
-		#----------------------------------------
 		every_system_within_border = {
 			limit = {
 				NOT = { has_star_flag = connected }
@@ -131,60 +68,50 @@ country_event = {
 				}
 			}
 		}
-		
-		#rinse and repeat for gateways' connected systems
-		if = {
+		every_system_within_border = {#FUNZIONA MA SERVE REITERAMENTO.
+			if = {
+				limit = {
+				
+					closest_system = {
+						limit = {
+							has_star_flag = connected
+						}
+						use_bypasses = yes
+						min_steps = 1
+						max_steps = 1
+					}
+					
+				}
+				set_star_flag = connected
+			}
+		}
+		#Repeat for gateways' and whormhole connected systems
+		while = {
 			limit = {
 				any_system_within_border = {
-					OR = {
-						has_megastructure = gateway_restored
-						has_megastructure = gateway_final
-						has_star_flag = lgate
+					NOT = { has_star_flag = connected }
+					root = {
+						any_system_within_border = {
+							has_hyperlane_to = prevprev
+							has_star_flag = connected
+						}
 					}
-					has_star_flag = connected
 				}
 			}
 			every_system_within_border = {
 				if = {
 					limit = {
-						OR = {
-							has_megastructure = gateway_restored
-							has_megastructure = gateway_final
-							AND = {
-								has_star_flag = lcluster_lgate
-								has_star_flag = lcluster
-							}
+						any_neighbor_system = {
+							has_star_flag = connected
 						}
 					}
 					set_star_flag = connected
 				}
 			}
-			while = {
-				limit = {
-					any_system_within_border = {
-						NOT = { has_star_flag = connected }
-						root = {
-							any_system_within_border = {
-								has_hyperlane_to = prevprev
-								has_star_flag = connected
-							}
-						}
-					}
-				}
-				every_system_within_border = {
-					if = {
-						limit = {
-							any_neighbor_system = {
-								has_star_flag = connected
-							}
-						}
-						set_star_flag = connected
-					}
-				}
-			}
 		}
 		
 		#######################################
+		#presa da phi non capisco cosa serve
 		#taking care of the sealed entry system
 		if = {
 			limit = {
