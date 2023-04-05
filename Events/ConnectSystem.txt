@@ -8,10 +8,19 @@ country_event = {
 	
 	trigger = {
 		is_at_war = no
-		NOT = { has_technology = tech_jump_drive_1 }
+		NOR = {
+				has_technology = tech_psi_jump_drive_1
+				has_technology = tech_jump_drive_1 
+		}
+		
 	}
 	
 	immediate = {
+		#removes the "connected" status from every system
+		# every_system_within_border = {
+		#  	limit = { has_star_flag = connected }
+		#  	remove_star_flag = connected
+		# }
 		every_owned_planet = {
 			limit = { num_pops > 1 }
 			solar_system = {
@@ -141,7 +150,6 @@ country_event = {
 			destroy_fleet = this
 		}
 		
-		#removes the "connected" status from every system
 		every_system_within_border = {
 			remove_star_flag = connected
 		}

@@ -33,36 +33,7 @@ can_add_claim = {
 		}
 	}
 	
-	custom_tooltip = {
-		fail_text = CANNOT_ADD_CLAIM_NOT_IN_LINE
-		closest_system = {
-			limit = {
-				AND = {
-					OR = {
-						AND = {
-							
-							exists = owner
-							OR = {
-								owner = { is_same_value = root }
-								owner = {
-									is_subject = yes
-									overlord = { is_same_value = root }
-								}
-							}
-						}
-						root = { 
-								has_claim = prev 
-						}
-					}
-				}
-			}
-			use_bypasses = yes
-			min_steps = 1
-			max_steps = 1
-			
-			
-		}
-	}
+	
 	custom_tooltip = {
 		fail_text = CANNOT_ADD_CLAIM_POLICY
 		OR = {
@@ -155,6 +126,36 @@ can_add_claim = {
 					has_valid_civic = civic_machine_assimilator
 				}
 			}
+		}
+	}
+	custom_tooltip = {
+		fail_text = CANNOT_ADD_CLAIM_NOT_IN_LINE
+		closest_system = {
+			limit = {
+				AND = {
+					OR = {
+						AND = {
+							
+							exists = owner
+							OR = {
+								owner = { is_same_value = root }
+								owner = {
+									is_subject = yes
+									overlord = { is_same_value = root }
+								}
+							}
+						}
+						root = { 
+								has_claim = prev 
+						}
+					}
+				}
+			}
+			use_bypasses = yes
+			min_steps = 1
+			max_steps = 1
+			
+			
 		}
 	}
 }
@@ -2451,5 +2452,31 @@ can_build_observation_station_around = {
 # Checks if the country is allowed to build a starbase around this planet/star
 can_build_starbase_around = {
 	exists = root
+	# hidden_trigger = {
+	# 	if = {
+	# 		limit = {
+	# 			root = { 
+	# 				OR = {
+	# 					NOT = { is_country_type = default } 
+	# 					is_at_war = yes
+	# 					has_technology = tech_psi_jump_drive_1
+	# 					has_technology = tech_jump_drive_1 
+	# 				}
+	# 				}
+	# 			}
+	# 		}
+	# 		always = yes
+	# 	}
+	# }
+	
+	
+	# custom_tooltip = {
+	# 	fail_text = CANNOT_ADD_CLAIM_POLICY
+	# 	from = {
+	# 		prev = {
+	# 			NOT = { has_star_flag = connected }
+	# 		}
+	# 	}
+	# }
 	always = yes
 }
