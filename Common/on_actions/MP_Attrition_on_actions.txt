@@ -1,0 +1,16 @@
+
+# A fleet has entered a system
+# Scope = Fleet
+# From = System
+on_entering_system_fleet = {
+	events = {
+		naval_attrition.1
+	}
+}
+
+# this = country
+on_monthly_pulse_country = {
+	events = {
+		naval_attrition.9
+	}
+}
