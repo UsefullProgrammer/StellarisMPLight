@@ -1,0 +1,113 @@
+namespace = naval_attrition
+#get by phi and modificate
+#On fleet passing through a wormhole
+# root = Fleet
+# From = System
+
+#On fleet entering a non-owned system
+# root = Fleet
+# From = System
+fleet_event = {
+	id = naval_attrition.1
+	hide_window = yes
+
+	is_triggered_only = yes
+	
+	trigger = {
+		from = {
+			exists = space_owner
+			space_owner = { is_at_war_with = root.owner }
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+				if = {
+					limit = {
+						root.owner = { used_naval_capacity_percent >= 1.0 }
+					}
+					every_owned_ship = {
+						if = {
+							limit = {
+								has_hp_percentage > 0.61
+							}
+							reduce_hp_percent = 10
+						}
+					}
+				}else_if = {
+					limit = {
+						root.owner = { used_naval_capacity_percent >= 0.75 }
+					}
+					every_owned_ship = {
+						if = {
+							limit = {
+								has_hp_percentage > 0.71
+							}
+							reduce_hp_percent = 8
+						}
+					}
+				}else_if = {
+					limit = {
+						root.owner = { used_naval_capacity_percent >= 0.5 }
+					}
+					every_owned_ship = {
+						if = {
+							limit = {
+								has_hp_percentage > 0.81
+							}
+							
+							reduce_hp_percent = 5
+						}
+					}
+				}else = {
+					every_owned_ship = {
+						if = {
+							limit = {
+								has_hp_percentage > 0.88
+							}
+							reduce_hp_percent = 3
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+#rule that damages planets as long as they are occupied, monthly based
+#also increases owner's war exhaustion
+country_event = {
+	id = naval_attrition.9
+	hide_window = yes
+
+	is_triggered_only = yes
+	
+	trigger = {
+		is_at_war = yes
+	}
+	
+	immediate = {
+		every_owned_planet = {
+			limit = { is_occupied_flag = yes }
+			add_planet_devastation = 3
+			owner = {
+				if = {
+					limit = { is_war_leader = yes }
+					add_static_war_exhaustion = {
+						attacker = prev.controller
+						location = prev
+						value_for_planet_destruction = 0.03
+					}
+				}
+				else = {
+					add_static_war_exhaustion = {
+						attacker = prev.controller
+						location = prev
+						value_for_planet_destruction = 0.01
+					}
+				}
+			}
+		}
+	}
+}
