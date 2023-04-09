@@ -12,7 +12,6 @@ country_event = {
 				has_technology = tech_psi_jump_drive_1
 				has_technology = tech_jump_drive_1 
 		}
-		
 	}
 	
 	immediate = {
