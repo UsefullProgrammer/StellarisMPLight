@@ -7,6 +7,7 @@ namespace = naval_attrition
 #On fleet entering a non-owned system
 # root = Fleet
 # From = System
+
 fleet_event = {
 	id = naval_attrition.1
 	hide_window = yes
@@ -22,51 +23,50 @@ fleet_event = {
 
 	immediate = {
 		hidden_effect = {
-				if = {
-					limit = {
-						root.owner = { used_naval_capacity_percent >= 1.0 }
-					}
-					every_owned_ship = {
-						if = {
-							limit = {
-								has_hp_percentage > 0.61
-							}
-							reduce_hp_percent = 10
+			if = {
+				limit = {
+					root.owner = { used_naval_capacity_percent >= 1.0 }
+				}
+				every_owned_ship = {
+					if = {
+						limit = {
+							has_hp_percentage > 0.61
 						}
+						reduce_hp_percent = 10
 					}
-				}else_if = {
-					limit = {
-						root.owner = { used_naval_capacity_percent >= 0.75 }
-					}
-					every_owned_ship = {
-						if = {
-							limit = {
-								has_hp_percentage > 0.71
-							}
-							reduce_hp_percent = 8
+				}
+			}else_if = {
+				limit = {
+					root.owner = { used_naval_capacity_percent >= 0.75 }
+				}
+				every_owned_ship = {
+					if = {
+						limit = {
+							has_hp_percentage > 0.71
 						}
+						reduce_hp_percent = 8
 					}
-				}else_if = {
-					limit = {
-						root.owner = { used_naval_capacity_percent >= 0.5 }
-					}
-					every_owned_ship = {
-						if = {
-							limit = {
-								has_hp_percentage > 0.81
-							}
-							
-							reduce_hp_percent = 5
+				}
+			}else_if = {
+				limit = {
+					root.owner = { used_naval_capacity_percent >= 0.5 }
+				}
+				every_owned_ship = {
+					if = {
+						limit = {
+							has_hp_percentage > 0.81
 						}
+						
+						reduce_hp_percent = 5
 					}
-				}else = {
-					every_owned_ship = {
-						if = {
-							limit = {
-								has_hp_percentage > 0.88
-							}
-							reduce_hp_percent = 3
+				}
+			}else = {
+				every_owned_ship = {
+					if = {
+						limit = {
+							has_hp_percentage > 0.88
 						}
+						reduce_hp_percent = 3
 					}
 				}
 			}
