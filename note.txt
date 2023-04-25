@@ -2,3 +2,9 @@ ship_hull_regen_add_static = 2
 ship_armor_regen_add_static = 5
 ship_hull_regen_add_perc = 0.05
 ship_armor_regen_add_perc = 0.15
+
+
+AI non costruisce più a più di 1 sistemi di distanza.
+Ottimizzato condizione di controllo
+Ora origine Slingshots to the stars può avere sistemi non connessi
+Ora civica eager explorers può espandersi anche in sistemi non connessi

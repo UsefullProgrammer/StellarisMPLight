@@ -1,3 +1,6 @@
-﻿
+﻿l_english:
  #ascension perk
  no_rev_engineering:1 "§Y$operation_steal_technology$§! operations will automatically fail when used against us and §YDebris§! from our destroyed ships cannot be studied by other empires.\n\nFurthermore, other empires cannot have bonus §Y$relative_technology$§! by your empire."
+
+ origin_tooltip_star_slingshot_effects:3 "- Start with a §H$quantum_catapult_ruined_slingshot$§! near your home system, and the technology necessary to repair and use it.\n- New starbases §Gcan§! built in remote systems cost §G75%§! less influence.\n- Your §HQuantum Catapults§! are §G50%§! more accurate\n- The §YQuantic Ambush§! bonus from catapulting fleets is increased to §G+50%§! Fire Rate."
+ civic_eager_explorers_effects:0 "$eager_explorers_base_effect$\nGain an increased chance to discover §HVoidcraft§! Technologies. \n\nNew starbases §Gcan§! built in remote systems"

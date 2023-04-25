@@ -9,8 +9,8 @@ country_event = {
 	trigger = {
 		is_at_war = no
 		NOR = {
-				has_technology = tech_psi_jump_drive_1
-				has_technology = tech_jump_drive_1 
+				has_feature_flags = jump_method
+				has_civic = civic_eager_explorers
 		}
 	}
 	immediate = { 
