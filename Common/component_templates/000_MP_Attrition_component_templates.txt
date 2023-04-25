@@ -1,0 +1,180 @@
+utility_component_template = {
+	key = "SHIP_AURA_NANOBOT_CLOUD"
+	size = medium
+	icon = "GFX_ship_part_aura_nanobot"
+	icon_frame = 1
+	power = 0
+
+	size_restriction = { titan }
+	component_set = "ship_aura_components"
+
+	friendly_aura = {
+		name = "aura_nanobot_cloud"
+		radius = @shipAuraRange
+		apply_on = ships
+
+		stack_info = {			#A ship can only be affected by one aura of a certain id. If multiple auras have the same ID the one with the highest priority will be applied.
+			id = friendly_nanobot_cloud
+			priority = 20
+		}
+
+		modifier = {
+			ship_armor_regen_add_static = 5
+			# ship_hull_regen_add_perc = 0.05
+			# ship_armor_regen_add_perc = 0.15
+		}
+
+		graphics = {
+			area_effect = {
+				entity = "circle_area_entity"
+				dynamic_scale = yes
+			}
+			ship_effect = {
+				entity = "ship_aura_positive_entity"
+				dynamic_scale = no
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 10
+	}
+}
+utility_component_template = {
+	key = "SHIP_AURA_BATTLEFIELD_REPAIRS"
+	size = medium
+	icon = "GFX_ship_part_aura_battlefield_repairs"
+	icon_frame = 1
+	power = 0
+
+	size_restriction = { constructor }
+	component_set = "ship_aura_components"
+
+	friendly_aura = {
+		name = "aura_battlefield_repairs"
+		system_wide = yes
+		apply_on = ships
+
+		stack_info = {
+			id = friendly_battlefield_repairs
+			priority = 20
+		}
+
+		modifier = {
+			ship_armor_regen_add_static = 2
+		}
+
+		graphics = {
+			area_effect = {
+				entity = "circle_area_entity"
+				dynamic_scale = yes
+			}
+			ship_effect = {
+				entity = "ship_aura_positive_entity"
+				dynamic_scale = no
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 10
+	}
+}
+utility_component_template = {
+	key = "AUTO_REPAIR_2"
+	size = aux
+	icon = "GFX_ship_part_ship_part_nanite_repair_system"
+	icon_frame = 1
+	power = -15
+	resources = {
+		category = ship_components
+		cost = {
+			alloys = 10
+			nanites = 1
+		}
+	}
+
+	modifier = {
+		ship_armor_regen_add_static = 8
+	}
+
+	prerequisites = { tech_nanite_repair_system }
+	component_set = "AUTO_REPAIR_2"
+
+	ai_weight = {
+		weight = 10
+		modifier = {
+			factor = 2.0
+			is_preferred_weapons = weapon_type_explosive
+		}
+
+		modifier = {
+			factor = 0.0
+			no_resource_for_component = { RESOURCE = nanites }
+		}
+		modifier = {
+			factor = 0.0
+			is_ai = yes
+		}
+	}
+}
+utility_component_template = {
+	key = "AUTO_REPAIR"
+	size = aux
+	icon = "GFX_ship_part_auto_repair"
+	icon_frame = 1
+	power = -10
+	resources = {
+		category = ship_components
+		cost = {
+			alloys = 20
+		}
+	}
+
+	modifier = {
+		ship_armor_regen_add_static = 4
+	}
+
+	prerequisites = { tech_regenerative_hull_tissue }
+	component_set = "AUTO_REPAIR"
+
+	ai_weight = {
+		weight = 10
+		modifier = {
+			factor = 2.0
+			is_preferred_weapons = weapon_type_explosive
+		}
+	}
+}
+utility_component_template = {
+	key = "COMPOSER_MARK"
+	size = aux
+	icon = "GFX_ship_part_composer_covenant_aux"
+	icon_frame = 1
+	power = -20
+	resources = {
+		category = ship_components
+		cost = {
+			alloys = 20
+			sr_zro = 2
+		}
+	}
+
+	modifier = {
+		ship_armor_regen_add_static = 5
+	}
+
+	prerequisites = { tech_covenant_composer }
+	component_set = "COMPOSER_MARK"
+
+	ai_weight = {
+		weight = 10
+		modifier = {
+			factor = 0
+			has_country_resource = {
+				type = sr_zro
+				amount < 100
+			}
+		}
+	}
+}
